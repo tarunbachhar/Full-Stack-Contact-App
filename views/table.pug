@@ -1,0 +1,59 @@
+doctype html
+html
+  head
+    // Import Google Icon Font
+    link(href='https://fonts.googleapis.com/icon?family=Material+Icons', rel='stylesheet')
+    // Compiled and minified CSS
+    link(rel='stylesheet', href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css')
+    // Let browser know website is optimized for mobile
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+  body(ng-app='myApp', ng-controller='myCtrl')
+    .row
+      .col.s2
+      .col.s8
+        h3.center Contact Information
+        center
+          a.btn-floating.btn-large.waves-effect.waves-light.red(href='contact')
+            i.material-icons add
+        hr
+        table.highlight
+          thead
+            tr
+              th S. No.
+              th Name
+              th Email
+              th Mobile
+              th Address
+              th Action
+          tbody
+            tr(ng-repeat='x in contact')
+              td {{ $index + 1 }}
+              td {{ x.firstname | uppercase}} {{ x.lastname | uppercase}}
+              td {{ x.mobile }}
+              td {{ x.email }}
+              td {{ x.address }}
+              td
+                a.btn.waves-effect.waves-light(href='contact/edit/{{x.cid}}') Edit
+                a.btn.waves-effect.waves-light.red.darken-1(href='contact/delete/{{x.cid}}') Delete
+                //
+                  <button class="btn waves-effect waves-light " type="button"><a href="edit/"+{{ x.id}}+"">Edit</a></button>
+                  <button class="btn waves-effect waves-light red darken-1" type="button" style="margin-left:10px;"><a href="delete/"+{{ x.id}}+"">Delete</a></button>
+      .col.s2
+    // Compiled and minified JavaScript
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js')
+    script(src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js')
+    script.
+      var app = angular.module('myApp', []);
+      app.controller('myCtrl', function($scope, $http) {
+      $http.get("datat")
+      .then(function(response) {
+      $scope.contact = response.data;
+      console.log(response.data);
+      }, function(response) {
+      $scope.contact = {};
+      });
+      });
+      function edit(id){
+      window.localStorage.setItem("id",id);
+      window.location.href="http://localhost:3000/edit";
+      }

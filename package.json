@@ -1,0 +1,22 @@
+{
+    "name": "contactapp",
+    "version": "1.0.0",
+    "description": "Simple Blog Post Application",
+    "main": "app.js",
+    "scripts": {
+      "start": "node app"
+    },
+    "author": "tarunbachhar",
+    "license": "ISC",
+    "dependencies": {
+      "body-parser": "^1.17.2",
+      "express": "^4.15.3",
+      "express-session": "^1.15.3",
+      "express-validator": "^3.2.0",
+      "pug": "^2.0.0-rc.1",
+      "cookie-parser": "^1.4.1",
+      "mysql":"*"
+
+    }
+  }
+  
